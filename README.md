@@ -7,19 +7,19 @@ A personal AI tutor that teaches you math step by step — remembers your progre
 ## 🖼️ Screenshots
 
 ### Login Page
-![Login](screenshots/login.jpeg)
+![Login](screenshots/login.png)
 
 ### Dashboard
-![Dashboard](screenshots/dashboard.jpeg)
+![Dashboard](screenshots/dashboard.png)
 
 ### Study Results
-![Study Results](screenshots/study_result.jpeg)
+![Study Results](screenshots/study_result.png)
 
 ### Leaderboard
-![Leaderboard](screenshots/leaderboard.jpeg)
+![Leaderboard](screenshots/leaderboard.png)
 
 ### Personality Analysis
-![Personality Analysis](screenshots/personality_detector.jpeg)
+![Personality Analysis](screenshots/personality_detector.png)
 
 ---
 
