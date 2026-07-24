@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+
+    <!-- ── Header ── -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; margin-top:1rem;">
+        <div>
+            <h1 style="font-size:1.6rem; font-weight:700;">
+                👋 Hello, {{ student.name }}!
+            </h1>
+            <span class="badge badge-{{ student.personality }}" style="margin-top:4px; display:inline-block;">
+                {{ student.personality.capitalize() }}
+            </span>
+        </div>
+        <a href="/leaderboard" class="btn btn-ghost">🏆 Leaderboard</a>
+    </div>
+
+    <!-- ── Stats ── -->
+    <div class="grid-3" style="margin-bottom:1.5rem;">
+        <div class="stat">
+            <div class="value">{{ overall }}%</div>
+            <div class="label">Overall Score</div>
+        </div>
+        <div class="stat">
+            <div class="value">{{ student.sessions }}</div>
+            <div class="label">Total Sessions</div>
+        </div>
+        <div class="stat">
+            <div class="value">{{ mastered }}/10</div>
+            <div class="label">Topics Mastered</div>
+        </div>
+    </div>
+
+    <!-- ── Personality Snapshot ── -->
+    <div class="card" style="margin-bottom:1.5rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+        <div style="display:flex; align-items:center; gap:16px;">
+            <div style="font-size:2.5rem;">
+                {% if personality.personality == 'curious' %}🔍
+                {% elif personality.personality == 'lazy' %}😴
+                {% else %}😰
+                {% endif %}
+            </div>
+            <div>
+                <div style="font-size:0.75rem; color:#94a3b8; text-transform:uppercase; letter-spacing:0.05em; margin-bottom:4px;">ML Personality Detection</div>
+                <div style="font-size:1.1rem; font-weight:700; text-transform:capitalize;">{{ personality.personality }}</div>
+                <div style="font-size:0.8rem; color:#64748b; margin-top:2px;">{{ personality.explanation }}</div>
+            </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px;">
+            <div style="text-align:center;">
+                <div style="font-size:1.4rem; font-weight:700; color:#667eea;">{{ personality.confidence }}%</div>
+                <div style="font-size:0.75rem; color:#94a3b8;">Confidence</div>
+            </div>
+            <a href="/personality" class="btn btn-ghost" style="white-space:nowrap;">View Full Report →</a>
+        </div>
+    </div>
+
+    <div class="grid-2">
+
+        <!-- ── Left: Topic Progress ── -->
+        <div class="card">
+            <h2>📚 Topic Progress</h2>
+            {% for topic in topics %}
+            <div style="margin-bottom: 0.9rem;" class="{{ topic.status }}">
+                <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
+                    <span style="font-size:0.9rem;">{{ topic.name }}</span>
+                    <span style="font-size:0.85rem; color:#94a3b8;">
+                        {% if topic.status == 'mastered' %}✅
+                        {% elif topic.status == 'learning' %}🔄
+                        {% elif topic.status == 'beginner' %}📖
+                        {% else %}⬜
+                        {% endif %}
+                        {{ topic.score }}%
+                    </span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ topic.score }}%;"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- ── Right: Study Panel ── -->
+        <div>
+            <!-- Auto Study -->
+            <div class="card">
+                <h2>🤖 Auto Study</h2>
+                <p style="color:#64748b; font-size:0.875rem; margin-bottom:1rem;">
+                    Let the tutor pick the best topic for you automatically.
+                </p>
+                <form action="/study" method="POST">
+                    <input type="hidden" name="mode" value="auto">
+                    <label>Number of Sessions</label>
+                    <select name="sessions">
+                        <option value="5">5 sessions</option>
+                        <option value="10">10 sessions</option>
+                        <option value="15">15 sessions</option>
+                        <option value="20">20 sessions</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary" style="width:100%;">
+                        Start Auto Study →
+                    </button>
+                </form>
+            </div>
+
+            <!-- Manual Study -->
+            <div class="card">
+                <h2>🎯 Study a Specific Topic</h2>
+                <p style="color:#64748b; font-size:0.875rem; margin-bottom:1rem;">
+                    Choose which topic to focus on today.
+                </p>
+                <form action="/study" method="POST">
+                    <input type="hidden" name="mode" value="manual">
+                    <label>Pick a Topic</label>
+                    <select name="topic">
+                        {% for topic in topics %}
+                        <option value="{{ topic.key }}">
+                            {{ topic.name }} — {{ topic.score }}%
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-success" style="width:100%;">
+                        Study This Topic →
+                    </button>
+                </form>
+            </div>
+
+            <!-- Last Saved -->
+            <div style="text-align:center; color:#475569; font-size:0.8rem;">
+                💾 Last saved: {{ student.last_saved or 'Never' }}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

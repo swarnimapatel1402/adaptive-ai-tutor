@@ -1,0 +1,17 @@
+
+# Adaptive AI Tutor — Requirements
+# Install everything at once:
+# py -m pip install -r requirements.txt
+
+# Web App
+flask>=2.0.0
+
+# Data Analysis
+pandas>=2.0.0
+
+# Visual Charts
+matplotlib>=3.7.0
+
+# Machine Learning (ml_engine.py + personality_detector.py)
+scikit-learn>=1.3.0
+numpy>=1.24.0

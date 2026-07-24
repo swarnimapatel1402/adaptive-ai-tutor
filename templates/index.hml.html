@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div style="min-height: 90vh; display: flex; align-items: center; justify-content: center;">
+    <div style="width: 100%; max-width: 440px; padding: 2rem;">
+
+        <div style="text-align: center; margin-bottom: 2.5rem;">
+            <div style="font-size: 4rem;">🎓</div>
+            <h1 style="font-size: 2rem; font-weight: 700; color: #f1f5f9; margin-top: 0.5rem;">
+                Adaptive AI Tutor
+            </h1>
+            <p style="color: #64748b; margin-top: 0.5rem;">
+                Your personal math tutor — learns with you, adapts to you.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>👋 Welcome — Enter Your Name</h2>
+
+            <form action="/login" method="POST">
+                <label>Your Name</label>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
+                    required
+                    autofocus
+                />
+
+                <label>Learning Style <span style="color:#475569">(only for new students)</span></label>
+                <select name="personality">
+                    <option value="curious">🧠 Curious — learns fast, remembers well</option>
+                    <option value="lazy">😴 Lazy — learns slowly, forgets quickly</option>
+                    <option value="anxious">😰 Anxious — struggles without proper order</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary" style="width:100%; padding: 0.8rem;">
+                    Enter →
+                </button>
+            </form>
+
+            <p style="color: #475569; font-size: 0.8rem; margin-top: 1rem; text-align: center;">
+                Already studied before? Just enter your name — progress loads automatically.
+            </p>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

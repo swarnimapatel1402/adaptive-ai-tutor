@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+
+    <div style="margin: 1.5rem 0; display:flex; justify-content:space-between; align-items:center;">
+        <h1 style="font-size:1.5rem; font-weight:700;">
+            📖 Study Results — {{ student.name }}
+        </h1>
+        <a href="/dashboard" class="btn btn-primary">← Back to Dashboard</a>
+    </div>
+
+    <div class="grid-2">
+
+        <!-- ── Session Results ── -->
+        <div class="card">
+            <h2>✅ What Happened This Session</h2>
+
+            {% if results %}
+                {% for r in results %}
+                <div class="result-item {% if not r.prereqs_met %}warning{% elif r.mastered %}success{% endif %}">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <strong style="font-size:0.95rem;">
+                            {{ r.topic.replace('_', ' ').title() }}
+                        </strong>
+                        <span style="font-size:0.85rem; color:#94a3b8;">
+                            Session {{ r.session_number }}
+                        </span>
+                    </div>
+                    <div style="margin-top:4px; font-size:0.85rem; color:#94a3b8;">
+                        {{ r.knowledge_before * 100 | round | int }}%
+                        →
+                        <strong style="color:#60a5fa;">
+                            {{ r.knowledge_after * 100 | round | int }}%
+                        </strong>
+                        (+{{ (r.gain * 100) | round(1) }}%)
+
+                        {% if r.mastered %}
+                            <span style="color:#22c55e; margin-left:6px;">🏆 Mastered!</span>
+                        {% endif %}
+
+                        {% if not r.prereqs_met %}
+                            <div style="color:#f59e0b; margin-top:2px;">
+                                ⚠️ Missing prerequisites — learned less than usual
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p style="color:#64748b;">All topics mastered! 🎉</p>
+            {% endif %}
+        </div>
+
+        <!-- ── Updated Progress ── -->
+        <div class="card">
+            <h2>📊 Updated Progress</h2>
+
+            <div style="display:flex; gap:1rem; margin-bottom:1rem;">
+                <div class="stat" style="flex:1;">
+                    <div class="value">{{ overall }}%</div>
+                    <div class="label">Overall</div>
+                </div>
+                <div class="stat" style="flex:1;">
+                    <div class="value">{{ mastered }}/10</div>
+                    <div class="label">Mastered</div>
+                </div>
+            </div>
+
+            {% for topic in topics %}
+            <div style="margin-bottom: 0.8rem;" class="{{ topic.status }}">
+                <div style="display:flex; justify-content:space-between; margin-bottom:3px;">
+                    <span style="font-size:0.85rem;">{{ topic.name }}</span>
+                    <span style="font-size:0.8rem; color:#94a3b8;">{{ topic.score }}%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ topic.score }}%;"></div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <a href="/dashboard" class="btn btn-primary" style="width:100%; margin-top:1rem; text-align:center;">
+                Study More →
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
