@@ -242,4 +242,4 @@ py -m pip install -r requirements.txt
 
 ## 🔗 GitHub
 
-[github.com/pragya1624/adaptive-ai-tutor](https://github.com/pragya1624/adaptive-ai-tutor)
+[github.com/pragya1624/adaptive-ai-tutor](https://github.com/swarnimapatel1402/adaptive-ai-tutor)
