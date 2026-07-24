@@ -7,19 +7,19 @@ A personal AI tutor that teaches you math step by step — remembers your progre
 ## 🖼️ Screenshots
 
 ### Login Page
-![Login](screenshots/login.png)
+![Login](screenshots/login.jpeg)
 
 ### Dashboard
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard.jpeg)
 
 ### Study Results
-![Study Results](screenshots/study_result.png)
+![Study Results](screenshots/study_result.jpeg)
 
 ### Leaderboard
-![Leaderboard](screenshots/leaderboard.png)
+![Leaderboard](screenshots/leaderboard.jpeg)
 
 ### Personality Analysis
-![Personality Analysis](screenshots/personality_detector.png)
+![Personality Analysis](screenshots/personality_detector.jpeg)
 
 ---
 
@@ -242,4 +242,4 @@ py -m pip install -r requirements.txt
 
 ## 🔗 GitHub
 
-[github.com/pragya1624/adaptive-ai-tutor](https://github.com/pragya1624/adaptive-ai-tutor)
+[github.com/swarnimapatel1402/adaptive-ai-tutor](https://github.com/swarnimapatel1402/adaptive-ai-tutor)
